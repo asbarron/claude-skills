@@ -18,4 +18,4 @@ Keep `description` under 250 characters (marketplace truncates at 250). Test cha
 
 ## Testing
 
-Run `/review-pr <number> --dry-run` against a real PR to verify output before posting.
+Run `/pr-review <number> --dry-run` against a real PR to verify output before posting.

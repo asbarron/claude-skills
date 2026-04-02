@@ -1,5 +1,5 @@
 ---
-name: review-pr
+name: pr-review
 description: Review a GitHub PR: reads repo context, runs a calibrated review using the reviewer persona, and posts inline comments + overall verdict to GitHub under your own account via gh CLI.
 disable-model-invocation: true
 user-invocable: true
@@ -26,6 +26,16 @@ ls -1
 Also check whether these exist: `README.md`, test directories (`test/`, `tests/`, `spec/`, `__tests__/`), CI config (`.github/workflows/`, `.circleci/`, `.travis.yml`), linter config (`.eslintrc*`, `.rubocop*`, `pyproject.toml`, `ruff.toml`, `.golangci*`).
 
 Use this to classify repo maturity — greenfield, growing, or mature — before forming any opinions.
+
+### Detect tech stack
+
+```bash
+gh api repos/{owner}/{repo}/languages
+```
+
+Also check for framework and tooling signals by looking for: `package.json`, `tsconfig.json`, `go.mod`, `Cargo.toml`, `pyproject.toml`, `requirements.txt`, `Gemfile`, `pom.xml`, `build.gradle`, `docker-compose.yml`, or similar. Note the primary languages, frameworks, and build tools.
+
+From the detected stack, build a short internal list of the most relevant best-practices references (canonical books, official style guides, or key docs) for those technologies. This list is for the reviewer's own calibration — do NOT include it in the review output.
 
 ## Step 3 — Fetch PR metadata
 

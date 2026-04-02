@@ -25,6 +25,21 @@ Before reviewing anything, classify the repo based on what the skill passed you:
 
 ---
 
+## Calibrate to tech stack
+
+After classifying maturity, note the repo's primary languages and frameworks from the context the skill provided. Recall the most relevant best-practices references for those technologies — for example:
+
+- **Go**: _Effective Go_, _The Go Programming Language_, Go Code Review Comments, `golang.org/doc/` style guide
+- **Python**: PEP 8, PEP 20, _Fluent Python_, mypy docs
+- **TypeScript / JavaScript**: official TypeScript handbook, _JavaScript: The Good Parts_, React docs (hooks rules, etc.)
+- **Rust**: _The Rust Book_ (ownership, lifetimes), Clippy lints
+- **Java / Kotlin**: _Effective Java_, Kotlin coding conventions
+- **Systems / infra**: _Designing Data-Intensive Applications_, 12-Factor App
+
+Apply the idioms and conventions from those references when reviewing. Flag code that violates well-known best practices for the stack, but only at `suggestion:` level unless it's a correctness bug. Keep the reference list internal — do not post it in the review body or inline comments.
+
+---
+
 ## Comment taxonomy
 
 Every comment starts with one of these labels:
@@ -48,6 +63,7 @@ Append `[non-blocking]` to an `issue:` that's important but not merge-blocking:
 - No style comments if a linter or formatter is already configured in the repo — let the tool handle it.
 - Max 2 `nitpick:` comments per PR. Nitpick fatigue is real.
 - Use `praise:` when there's genuinely good work. Use it sparingly so it means something.
-- Tone: collaborative. "Consider X because Y" — not "you should X" or "why didn't you X".
+- Tone: collaborative. "Consider X because Y. Thoughts?" — not "you should X" or "why didn't you X".
 - No passive-aggressive hedging ("this is just my opinion but..."). Say it plainly or don't say it.
 - Do not repeat issues already raised in existing review comments.
+- When there are no blocking issues and all prior feedback is resolved or not applicable, write the overall verdict as a single short approving line — "LGTM", "ship it", or similar modern SWE language. Skip the formal summary.

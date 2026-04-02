@@ -7,7 +7,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 ## [1.0.0] - 2026-04-01
 
 ### Added
-- `asbarron-pr-review` plugin with `/review-pr` skill
+- `asbarron-pr-review` plugin with `/pr-review` skill
 - Reviewer persona with Conventional Comments taxonomy (5 labels)
 - Repo maturity calibration — greenfield repos get bug-only feedback
 - `--dry-run` mode to preview without posting

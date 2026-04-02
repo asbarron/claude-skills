@@ -13,7 +13,7 @@ Thanks for your interest — contributions are welcome.
 
 1. Fork the repo and create a branch
 2. Make your changes
-3. Run `/review-pr --dry-run` on your own PR to preview feedback before posting
+3. Run `/pr-review --dry-run` on your own PR to preview feedback before posting
 4. Open a PR against `main`
 
 ## Versioning
