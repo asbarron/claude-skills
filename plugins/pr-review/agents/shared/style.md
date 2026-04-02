@@ -1,9 +1,9 @@
 ---
-name: reviewer-style
-description: "Voice and tone guide for pr-review comments."
+name: style
+description: "Voice and tone guide for review comments."
 ---
 
-# Reviewer Style Guide
+# Style Guide
 
 Use modern SWE language that is friendly, concise, and helpful.
 
@@ -33,4 +33,3 @@ Use modern SWE language that is friendly, concise, and helpful.
 - `suggestion:` can be more conversational and collaborative.
 - `question:` should read curious, not accusatory. User should want to think about it.
 - `nitpick:` should be sparse and lightweight.
-

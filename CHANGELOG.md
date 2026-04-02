@@ -4,6 +4,29 @@ All notable changes to this project will be documented here.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-04-02
+
+### Added
+- `--deep` mode: four parallel review lenses (general, security, architecture, git-history) with research-backed confidence scoring
+- Confidence scorer fuses findings from all lenses — deduplicates, verifies assumptions, filters false positives, ranks by tier (Critical/High/Medium)
+- `--dry-run` and `--approve` flags for both normal and deep modes
+
+### Changed
+- Modularized agent files: extracted shared calibration, taxonomy, and style rules into `agents/shared/`
+- `reviewer.md` slimmed to identity + shared refs (no duplicated rules)
+- `SKILL.md` refactored into shared setup steps with mode branching
+- Removed `reviewer-style.md` (replaced by `agents/shared/style.md`)
+
+### Added (agents)
+- `agents/shared/calibration.md` — repo maturity, tech-stack, edge-case rigor, DRY policy, verify-before-flagging
+- `agents/shared/taxonomy.md` — comment labels, blocking rules, quantitative limits
+- `agents/shared/style.md` — voice, emoji, tone
+- `agents/lens-general.md` — code quality lens
+- `agents/lens-security.md` — security lens (concrete attack scenarios required)
+- `agents/lens-architecture.md` — architecture lens
+- `agents/lens-git-history.md` — git history lens
+- `agents/confidence-scorer.md` — fuser/scorer for deep mode
+
 ## [1.0.0] - 2026-04-01
 
 ### Added
