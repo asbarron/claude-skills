@@ -15,11 +15,18 @@ A PR review skill for Claude Code. Run `/pr-review` in any repo with an open PR 
 #### Install
 
 ```bash
-# Add this repo as a marketplace (once)
-claude plugin marketplace add --scope user https://github.com/asbarron/claude-skills
+# In Claude Code, add this repo as a marketplace (once)
+/plugin marketplace add asbarron/claude-skills
 
-# Install the plugin by name
-claude plugin install pr-review
+# Install the plugin
+/plugin install pr-review@asbarron-skills
+```
+
+CLI equivalent:
+
+```bash
+claude plugin marketplace add --scope user asbarron/claude-skills
+claude plugin install pr-review@asbarron-skills
 ```
 
 #### Usage
