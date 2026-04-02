@@ -1,0 +1,12 @@
+{
+  "name": "pro-plan",
+  "version": "1.0.0",
+  "description": "Review and revise implementation plans: tech-stack-aware best practices, DRY checks, structure analysis, and completeness review.",
+  "author": {
+    "name": "Ava Barron"
+  },
+  "homepage": "https://github.com/asbarron/claude-skills",
+  "repository": "https://github.com/asbarron/claude-skills",
+  "license": "MIT",
+  "keywords": ["plan-review", "tdd-review", "best-practices", "implementation-plan"]
+}
