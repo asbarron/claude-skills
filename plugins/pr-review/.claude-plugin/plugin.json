@@ -1,7 +1,7 @@
 {
   "name": "pr-review",
-  "version": "1.0.0",
-  "description": "Practical, friendly PR reviews posted to GitHub under your own account. Single command, inline comments, calibrated to repo maturity.",
+  "version": "2.0.0",
+  "description": "Calibrated PR reviews via gh CLI. Use --deep for multi-lens review with confidence scoring.",
   "author": {
     "name": "Ava Barron"
   },
