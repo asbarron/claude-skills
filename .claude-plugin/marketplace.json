@@ -1,0 +1,22 @@
+{
+  "name": "asbarron-skills",
+  "owner": {
+    "name": "Ava Barron"
+  },
+  "plugins": [
+    {
+      "name": "asbarron-pr-review",
+      "source": "./plugins/asbarron-pr-review",
+      "description": "Practical, friendly PR reviews posted to GitHub under your own account. Single command, inline comments, calibrated to repo maturity.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Ava Barron"
+      },
+      "homepage": "https://github.com/asbarron/claude-skills",
+      "repository": "https://github.com/asbarron/claude-skills",
+      "license": "MIT",
+      "keywords": ["pr-review", "code-review", "github", "pull-request"],
+      "category": "development"
+    }
+  ]
+}
