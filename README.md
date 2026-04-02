@@ -6,7 +6,7 @@ Claude Code plugins by Ava Barron.
 
 ## Plugins
 
-### `asbarron-pr-review`
+### `pr-review`
 
 A PR review skill for Claude Code. Run `/pr-review` in any repo with an open PR — Claude reads the diff, calibrates to the repo's current state, and posts inline comments + an overall verdict to GitHub **under your own account** via `gh` CLI.
 
