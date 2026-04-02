@@ -62,11 +62,16 @@ Combine plan mentions and repo signals into a deduplicated tech stack list.
 
 ## Step 4 — Web-search for canonical resources
 
-Load `${CLAUDE_SKILL_DIR}/../../agents/shared/resource-seeds.md` for seed queries.
+For each detected technology (cap at **5 technologies**), run a WebSearch for authoritative best-practices resources. Construct queries like: `"[technology] best practices"`, `"[technology] design patterns"`, `"[technology] common pitfalls"`.
 
-For each detected technology (cap at **5 technologies**), run a WebSearch using the seed query from resource-seeds.md. If the technology isn't in the seeds list, construct a query: `"[technology] best practices official documentation"`.
+Cap total web searches at **8**. For each search, briefly note the top authoritative result (title, source, key takeaway).
 
-Cap total web searches at **8**. For each search, briefly note the top authoritative result (title, source, key takeaway). Prefer official documentation domains.
+**Resource priority** (prefer in this order):
+1. Official documentation (language specs, framework docs)
+2. Books by the language/framework authors (e.g., Donovan & Kernighan for Go, Kleppmann for DDIA)
+3. O'Reilly books and publications
+4. Academic research and conference papers
+5. Widely-cited community guides (e.g., Google API Design Guide, 12factor.net)
 
 Store the collected resource summaries — these are passed to all agents as source-of-truth context.
 
@@ -88,8 +93,6 @@ Read the shared agent files:
 - `${CLAUDE_SKILL_DIR}/../../agents/shared/calibration.md`
 - `${CLAUDE_SKILL_DIR}/../../agents/shared/taxonomy.md`
 - `${CLAUDE_SKILL_DIR}/../../agents/shared/style.md`
-
-Apply throughout the remaining steps.
 
 ---
 

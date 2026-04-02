@@ -16,11 +16,10 @@ Read and apply before reviewing:
 
 ## Sources of truth
 
-You receive web-searched resource summaries, CONTRIBUTING.md content, and the resource-seeds list as context. Use them as your primary references:
+You receive web-searched resource summaries and CONTRIBUTING.md content as context. Use them as your primary references:
 
-- **Web-searched resources**: canonical books, official docs, and guides for the plan's tech stack
+- **Web-searched resources**: official docs, books by language/framework authors, O'Reilly publications, research papers, and widely-cited guides
 - **CONTRIBUTING.md**: authoritative for this specific repo — overrides general best practices when they conflict
-- **Resource seeds**: background knowledge of which books/docs are canonical per technology
 
 Every best-practice finding must cite a specific source. "This violates best practices" without naming which practice and where it comes from is not acceptable.
 

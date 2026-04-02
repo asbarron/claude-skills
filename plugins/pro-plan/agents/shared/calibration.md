@@ -35,8 +35,12 @@ Before raising a finding:
 
 When using web-searched resources and CONTRIBUTING.md as sources of truth:
 
-- Official documentation > community blog posts > Stack Overflow
-- Books by known authors > random tutorials
+1. Official documentation (language specs, framework docs)
+2. Books by the language/framework authors
+3. O'Reilly books and publications
+4. Academic research and conference papers
+5. Widely-cited community guides
+
 - CONTRIBUTING.md is authoritative for this specific repo — it overrides general best practices when they conflict
 - If two authoritative sources disagree, note the disagreement instead of picking a side
 - Never invent a best practice. If you can't cite it, don't flag it.
