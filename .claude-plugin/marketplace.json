@@ -1,11 +1,14 @@
 {
   "name": "asbarron-skills",
+  "metadata": {
+    "description": "A curated marketplace of Claude Code plugins focused on practical engineering workflows."
+  },
   "owner": {
     "name": "Ava Barron"
   },
   "plugins": [
     {
-      "name": "asbarron-pr-review",
+      "name": "pr-review",
       "source": "./plugins/asbarron-pr-review",
       "description": "Practical, friendly PR reviews posted to GitHub under your own account. Single command, inline comments, calibrated to repo maturity.",
       "version": "1.0.0",

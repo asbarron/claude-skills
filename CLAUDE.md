@@ -10,7 +10,7 @@ Guidelines for Claude when working in this repo.
 
 ## When editing the reviewer persona
 
-`plugins/asbarron-pr-review/agents/reviewer.md` defines tone, taxonomy, and calibration rules. Changes here affect every review the skill produces. Be conservative — the rules exist to prevent review fatigue.
+For the `pr-review` plugin, `plugins/asbarron-pr-review/agents/reviewer.md` defines tone, taxonomy, and calibration rules. Changes here affect every review the skill produces. Be conservative — the rules exist to prevent review fatigue.
 
 ## When editing SKILL.md
 
