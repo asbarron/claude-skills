@@ -15,17 +15,11 @@ A PR review skill for Claude Code. Run `/pr-review` in any repo with an open PR 
 #### Install
 
 ```bash
-claude plugin install https://github.com/asbarron/claude-skills
-```
+# Add this repo as a marketplace (once)
+claude plugin marketplace add --scope user https://github.com/asbarron/claude-skills
 
-Or add to your `~/.claude/marketplace.json`:
-
-```json
-{
-  "plugins": [
-    { "source": "https://github.com/asbarron/claude-skills" }
-  ]
-}
+# Install the plugin by name
+claude plugin install pr-review
 ```
 
 #### Usage
@@ -50,7 +44,7 @@ Or add to your `~/.claude/marketplace.json`:
 
 1. Reads repo context (age, structure, test/CI presence) to calibrate review depth
 2. Fetches the diff and existing comments
-3. Applies the [reviewer persona](plugins/asbarron-pr-review/agents/reviewer.md) — Conventional Comments taxonomy, max 2 nitpicks, no style comments if a linter is configured
+3. Applies the [reviewer persona](plugins/pr-review/agents/reviewer.md) — Conventional Comments taxonomy, max 2 nitpicks, no style comments if a linter is configured
 4. Posts inline comments + overall verdict via `gh api` under your GitHub identity
 
 #### Comment format

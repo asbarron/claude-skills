@@ -1,5 +1,5 @@
 {
-  "name": "asbarron-pr-review",
+  "name": "pr-review",
   "version": "1.0.0",
   "description": "Practical, friendly PR reviews posted to GitHub under your own account. Single command, inline comments, calibrated to repo maturity.",
   "author": {

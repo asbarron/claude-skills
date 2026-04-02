@@ -1,6 +1,6 @@
 ---
 name: pr-review
-description: Review a GitHub PR: reads repo context, runs a calibrated review using the reviewer persona, and posts inline comments + overall verdict to GitHub under your own account via gh CLI.
+description: "Review a GitHub PR: reads repo context, runs a calibrated review using the reviewer persona, and posts inline comments + overall verdict to GitHub under your own account via gh CLI."
 disable-model-invocation: true
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob
@@ -63,13 +63,18 @@ Treat existing feedback as first-class input.
 gh pr diff $PR_NUMBER
 ```
 
-## Step 6 — Load reviewer persona
+## Step 6 — Load reviewer persona and style
 
-Read `${CLAUDE_SKILL_DIR}/../../agents/reviewer.md` and apply that persona for the rest of this skill.
+Read both files and apply them for the rest of this skill:
+
+- `${CLAUDE_SKILL_DIR}/../../agents/reviewer.md` (quality/calibration rules)
+- `${CLAUDE_SKILL_DIR}/../../agents/reviewer-style.md` (voice/tone)
+
+If there is a conflict, prioritize correctness and calibration from `reviewer.md` over stylistic choices.
 
 ## Step 7 — Produce the review
 
-Using the persona from reviewer.md, produce:
+Using the persona and style guides, produce:
 - An overall verdict (1–3 sentences) for the review body
 - A short section: **“Follow-ups on existing feedback”**:
   - List the top prior feedback items (prefer the most recent review first).
@@ -77,7 +82,7 @@ Using the persona from reviewer.md, produce:
   - For **still open** items, include a specific fix suggestion (what to change and where).
 - Per-file inline comments with: file path, diff position (counted from the `@@` hunk header — NOT the actual line number), and comment body
 
-Calibrate depth to repo maturity (see reviewer.md). When in doubt, say less.
+Calibrate depth to repo maturity (see reviewer.md). Keep comments high-signal and concise; style should improve readability, not increase volume.
 
 ## Step 8 — Post or print
 

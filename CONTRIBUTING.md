@@ -7,7 +7,7 @@ Thanks for your interest — contributions are welcome.
 - **Bug fixes** — broken skill behavior, wrong output, bad edge case handling
 - **Plugin improvements** — better prompts, new flags, improved persona calibration
 - **New plugins** — add a new skill or agent in its own `plugins/<name>/` directory
-- **Persona customization** — fork and edit the [reviewer persona](plugins/asbarron-pr-review/agents/reviewer.md) to fit your team's review culture
+- **Persona customization** — fork and edit the [reviewer persona](plugins/pr-review/agents/reviewer.md) to fit your team's review culture for `pr-review`
 
 ## Submitting changes
 
