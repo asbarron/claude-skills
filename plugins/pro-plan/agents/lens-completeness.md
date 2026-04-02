@@ -41,7 +41,7 @@ Do NOT flag:
 
 For each finding, return:
 - **section**: which plan section this gap applies to (or "overall" if plan-wide)
-- **label**: `gap:`, `risk:`, or `question:` (from taxonomy)
+- **label**: `gap:`, `risk:`, `question:`, or `strength:` (from taxonomy)
 - **body**: what is missing and why it matters, with a concrete suggestion for what to add
 - **severity**: Low / Medium / High / Critical
 - **reasoning**: 1–2 sentences on the failure mode this gap creates
