@@ -4,6 +4,19 @@ All notable changes to this project will be documented here.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [pro-plan 1.0.0] - 2026-04-02
+
+### Added
+- `pro-plan` plugin with `/pro-plan` skill
+- Four parallel review lenses: DRY, best practices, structure, completeness
+- Review synthesizer with confidence scoring (dedup, promote/drop signals, tier assignment)
+- Plan reviser that preserves original voice and marks changes with `<!-- pro-plan -->` comments
+- Tech stack detection from plan text and repo signals
+- Web-searched canonical resources per detected technology
+- CONTRIBUTING.md as source of truth alongside books/docs
+- `--review-only` and `--revise-only` flags
+- Revised plans written to `{original}-pro.md`
+
 ## [2.0.0] - 2026-04-02
 
 ### Added
