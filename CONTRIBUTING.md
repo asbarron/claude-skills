@@ -1,35 +1,21 @@
 # Contributing
 
-## Adding or improving a plugin
+Thanks for your interest — contributions are welcome.
 
-Plugins live in `plugins/<name>/`. Each plugin has:
+## Types of contributions
 
-```
-plugins/<name>/
-├── .claude-plugin/
-│   └── plugin.json       # Manifest
-├── skills/               # Slash commands
-│   └── <skill-name>/
-│       └── SKILL.md
-└── agents/               # Subagent personas
-    └── <agent-name>.md
-```
-
-## Customizing the reviewer persona
-
-The reviewer's tone, taxonomy, and rules are in [`plugins/asbarron-pr-review/agents/reviewer.md`](plugins/asbarron-pr-review/agents/reviewer.md). Fork this repo and edit that file to fit your team's review culture.
-
-Common customizations:
-- Add or remove labels from the taxonomy
-- Tighten or loosen the nitpick limit
-- Add language- or framework-specific rules
+- **Bug fixes** — broken skill behavior, wrong output, bad edge case handling
+- **Plugin improvements** — better prompts, new flags, improved persona calibration
+- **New plugins** — add a new skill or agent in its own `plugins/<name>/` directory
+- **Persona customization** — fork and edit the [reviewer persona](plugins/asbarron-pr-review/agents/reviewer.md) to fit your team's review culture
 
 ## Submitting changes
 
-1. Fork the repo
+1. Fork the repo and create a branch
 2. Make your changes
-3. Open a PR — the `/review-pr` skill will review it
+3. Run `/review-pr --dry-run` on your own PR to preview feedback before posting
+4. Open a PR against `main`
 
 ## Versioning
 
-This project follows [Semantic Versioning](https://semver.org). Update `version` in both `plugin.json` and `marketplace.json`, and add an entry to `CHANGELOG.md`.
+This project follows [Semantic Versioning](https://semver.org). When changing a plugin, bump `version` in its `plugin.json` and in `marketplace.json`, then add an entry to `CHANGELOG.md`.

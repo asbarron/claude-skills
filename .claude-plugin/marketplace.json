@@ -1,5 +1,4 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "asbarron-skills",
   "owner": {
     "name": "Ava Barron"
@@ -13,8 +12,8 @@
       "author": {
         "name": "Ava Barron"
       },
-      "homepage": "https://github.com/avabarron/claude-skills",
-      "repository": "https://github.com/avabarron/claude-skills",
+      "homepage": "https://github.com/asbarron/claude-skills",
+      "repository": "https://github.com/asbarron/claude-skills",
       "license": "MIT",
       "keywords": ["pr-review", "code-review", "github", "pull-request"],
       "category": "development"

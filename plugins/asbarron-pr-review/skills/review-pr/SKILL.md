@@ -1,5 +1,5 @@
 ---
-name: pr-review
+name: review-pr
 description: Review a GitHub PR: reads repo context, runs a calibrated review using the reviewer persona, and posts inline comments + overall verdict to GitHub under your own account via gh CLI.
 disable-model-invocation: true
 user-invocable: true
@@ -40,7 +40,12 @@ gh api repos/{owner}/{repo}/pulls/$PR_NUMBER/comments
 gh api repos/{owner}/{repo}/pulls/$PR_NUMBER/reviews
 ```
 
-Skip any issues already raised in existing comments.
+Treat existing feedback as first-class input.
+
+- Build a deduped list of prior feedback items by grouping on `{path, original_position?, body}` (be forgiving about small text differences).
+- For each prior item, decide: **resolved by this PR**, **still open**, or **not applicable** (e.g., file removed / refactor).
+- If still open, propose the smallest concrete code change that would close it.
+- Avoid re-posting the same comment text. Only add a new inline comment if you are adding *new* information (e.g., updated context, a clearer fix, or the issue got worse).
 
 ## Step 5 — Fetch the diff
 
@@ -56,6 +61,10 @@ Read `${CLAUDE_SKILL_DIR}/../../agents/reviewer.md` and apply that persona for t
 
 Using the persona from reviewer.md, produce:
 - An overall verdict (1–3 sentences) for the review body
+- A short section: **“Follow-ups on existing feedback”**:
+  - List the top prior feedback items (prefer the most recent review first).
+  - Mark each as **resolved** / **still open** / **not applicable**.
+  - For **still open** items, include a specific fix suggestion (what to change and where).
 - Per-file inline comments with: file path, diff position (counted from the `@@` hunk header — NOT the actual line number), and comment body
 
 Calibrate depth to repo maturity (see reviewer.md). When in doubt, say less.

@@ -15,7 +15,7 @@ A PR review skill for Claude Code. Run `/review-pr` in any repo with an open PR 
 #### Install
 
 ```bash
-claude plugin install https://github.com/avabarron/claude-skills
+claude plugin install https://github.com/asbarron/claude-skills
 ```
 
 Or add to your `~/.claude/marketplace.json`:
@@ -23,7 +23,7 @@ Or add to your `~/.claude/marketplace.json`:
 ```json
 {
   "plugins": [
-    { "source": "https://github.com/avabarron/claude-skills" }
+    { "source": "https://github.com/asbarron/claude-skills" }
   ]
 }
 ```
