@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "pr-review",
-      "source": "./plugins/asbarron-pr-review",
+      "source": "./plugins/pr-review",
       "description": "Practical, friendly PR reviews posted to GitHub under your own account. Single command, inline comments, calibrated to repo maturity.",
       "version": "1.0.0",
       "author": {

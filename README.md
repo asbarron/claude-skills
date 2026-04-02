@@ -44,7 +44,7 @@ claude plugin install pr-review
 
 1. Reads repo context (age, structure, test/CI presence) to calibrate review depth
 2. Fetches the diff and existing comments
-3. Applies the [reviewer persona](plugins/asbarron-pr-review/agents/reviewer.md) — Conventional Comments taxonomy, max 2 nitpicks, no style comments if a linter is configured
+3. Applies the [reviewer persona](plugins/pr-review/agents/reviewer.md) — Conventional Comments taxonomy, max 2 nitpicks, no style comments if a linter is configured
 4. Posts inline comments + overall verdict via `gh api` under your GitHub identity
 
 #### Comment format
