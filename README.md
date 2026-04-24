@@ -128,6 +128,44 @@ Revised plans are written to `{original-name}-pro.md` in the same directory.
 
 ---
 
+### `harness-review`
+
+Claude Code harness audit. Run `/harness-review` in any project — Claude scans your CLAUDE.md files, hooks, skills, agents, and settings, then runs four parallel review lenses with research-backed calibration. The core value: it tells you which CLAUDE.md instructions should be hooks, which are dead weight, and what's missing.
+
+**Prerequisites:** None.
+
+#### Usage
+
+```bash
+/harness-review             # audit the current project's harness
+/harness-review --dry-run   # same (default behavior, reserved for future fixup integration)
+```
+
+#### How it works
+
+1. Scans all CLAUDE.md files (root, parents, home), settings.json + settings.local.json hooks, skills, agents, and installed plugins
+2. Detects tech stack from repo signals (`package.json`, `go.mod`, etc.)
+3. Classifies harness maturity (bare, basic, mature) to calibrate review strictness
+4. Launches four review lenses in parallel:
+   - **Enforcement** — maps each CLAUDE.md instruction to enforceable (hook) vs. judgment (keep). Based on research showing 74% of rules are symbolically enforceable with 0% violations vs. 20-52% with prompts alone.
+   - **Completeness** — missing config for the detected stack (test commands, linter hooks, destructive command protection)
+   - **Structure** — CLAUDE.md bloat, organization, duplication, skill placement. Based on research showing instruction compliance drops from 94% to 21% as instructions scale.
+   - **Best Practices** — anti-patterns per Anthropic docs, "can but doesn't" calibration from prompt optimization research
+5. Deduplicates, scores, and tiers findings (Critical/High/Medium)
+
+#### Labels
+
+| Label | Meaning |
+|-------|---------|
+| `migrate:` | Should be a hook — includes target event, handler type, and config snippet |
+| `gap:` | Missing configuration that matters |
+| `issue:` | Incorrect or anti-pattern configuration |
+| `bloat:` | Remove — self-evident, aspirational, or duplicated |
+| `suggestion:` | Take it or leave it |
+| `strength:` | Something done well |
+
+---
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).

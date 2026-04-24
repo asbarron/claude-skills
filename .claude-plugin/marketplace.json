@@ -34,6 +34,20 @@
       "license": "MIT",
       "keywords": ["plan-review", "tdd-review", "best-practices", "implementation-plan"],
       "category": "development"
+    },
+    {
+      "name": "harness-review",
+      "source": "./plugins/harness-review",
+      "description": "Audit your Claude Code harness: research-backed enforcement mapping, bloat detection, completeness checks, and best-practices review.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Ava Barron"
+      },
+      "homepage": "https://github.com/asbarron/claude-skills",
+      "repository": "https://github.com/asbarron/claude-skills",
+      "license": "MIT",
+      "keywords": ["harness-review", "claude-md", "hooks", "configuration", "audit"],
+      "category": "development"
     }
   ]
 }

@@ -4,6 +4,20 @@ All notable changes to this project will be documented here.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [harness-review 1.0.0] - 2026-04-23
+
+### Added
+- `harness-review` plugin with `/harness-review` skill
+- Four parallel review lenses: enforcement, completeness, structure, best practices
+- Enforcement lens maps CLAUDE.md instructions to advisory vs. enforceable (hooks) using research-backed classification (74% enforceability finding from arxiv 2604.15579)
+- Structure lens detects bloat using instruction-scaling research (94% → 21% compliance as instructions increase)
+- Completeness lens checks for missing config per detected tech stack
+- Best-practices lens validates against Anthropic docs and "can but doesn't" calibration
+- Inline synthesis with dedup, promote/drop signals, and tier assignment (no separate synthesizer agent needed)
+- Harness maturity classification (bare/basic/mature) controlling review strictness
+- Merged settings.json + settings.local.json hooks for complete coverage
+- Novel `migrate:` and `bloat:` finding labels unique to harness review
+
 ## [pro-plan 1.0.0] - 2026-04-02
 
 ### Added

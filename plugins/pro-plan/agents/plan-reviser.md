@@ -20,6 +20,8 @@ You receive an original implementation plan, review findings, and the author's a
 
 ## Process
 
+### When findings are provided (default mode)
+
 1. Read the original plan in full
 2. Read all findings (Critical → High → Medium) and the author's answers to questions
 3. For each finding:
@@ -28,6 +30,16 @@ You receive an original implementation plan, review findings, and the author's a
    - If a finding was a `question:` and the author answered, incorporate their answer into the plan
 4. For `strength:` findings — explicitly preserve these sections unchanged
 5. For sections with no findings — leave them exactly as-is (do not edit, "improve", or reformat)
+
+### When no findings are provided (`--revise-only` mode)
+
+Use the tech stack resources, CONTRIBUTING.md, and shared foundations to independently improve the plan:
+
+1. Read the original plan in full
+2. Check each phase/section for structural improvements: missing dependencies between phases, unclear success criteria, phases that could be parallelized
+3. Check for completeness using the tech stack context: missing error handling strategy, no rollback plan, untested critical paths
+4. Check for alignment with CONTRIBUTING.md conventions (if provided)
+5. Apply the same minimal-change and preserve-voice principles — restructure and fill gaps, but don't rewrite working sections
 
 ---
 
