@@ -58,6 +58,15 @@ ls package.json tsconfig.json go.mod go.sum Cargo.toml pyproject.toml requiremen
 
 Combine plan mentions and repo signals into a deduplicated tech stack list.
 
+Also gather a repo file listing for the DRY lens:
+
+```bash
+ls -1 2>/dev/null
+ls -1 src/ lib/ pkg/ internal/ app/ 2>/dev/null
+```
+
+Store this listing — it is passed to agents in Step 8 so the DRY lens can check for existing code the plan might reinvent.
+
 ---
 
 ## Step 4 — Web-search for canonical resources
@@ -118,6 +127,7 @@ Launch **4 Agent calls in parallel**. Each agent receives:
 - Web-searched resource summaries
 - CONTRIBUTING.md content (if it exists)
 - Plan size classification
+- Repo file listing (from Step 3)
 - The shared foundations content (pass content, not file paths)
 - The lens-specific agent instructions
 
@@ -130,7 +140,7 @@ Each lens produces structured findings: `{section, label, body, severity, reason
 Load the review synthesizer:
 - `${CLAUDE_SKILL_DIR}/../../agents/review-synthesizer.md`
 
-Feed it all findings from all 4 lenses plus the original plan text.
+Feed it all findings from all 4 lenses, the original plan text, and the shared foundations content (pass content, not file paths).
 
 ### 9a — Print review
 
@@ -162,9 +172,9 @@ Stats: [N] raw → [N] dedup → [N] posted ([breakdown by tier])
 
 ### 9b — Ask user questions
 
-If the synthesizer produced questions, present them via `AskUserQuestion`. Cap at 5 questions. Group by theme.
+**If `--review-only`:** Print the synthesizer's questions under a **"Questions to consider"** heading as part of the review output. Do not use `AskUserQuestion` — the questions are for the author's reflection, not for collection. Print a summary line and exit.
 
-**If `--review-only`:** Stop here. Print a summary line and exit.
+**Otherwise:** If the synthesizer produced questions, present them via `AskUserQuestion`. Cap at 5 questions. Group by theme.
 
 ---
 

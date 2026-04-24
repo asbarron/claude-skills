@@ -1,0 +1,12 @@
+{
+  "name": "harness-review",
+  "version": "1.0.0",
+  "description": "Audit your Claude Code harness: CLAUDE.md, hooks, skills, agents, and settings. Research-backed enforcement mapping and calibrated multi-lens review.",
+  "author": {
+    "name": "Ava Barron"
+  },
+  "homepage": "https://github.com/asbarron/claude-skills",
+  "repository": "https://github.com/asbarron/claude-skills",
+  "license": "MIT",
+  "keywords": ["harness-review", "claude-md", "hooks", "configuration", "audit"]
+}
