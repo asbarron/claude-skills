@@ -36,8 +36,8 @@ Do NOT flag:
 For each finding, return:
 - **file**: path relative to repo root
 - **lines**: line range or single line from the diff
-- **label**: `issue:`, `suggestion:`, `question:`, `nitpick:`, or `praise:` (from taxonomy)
-- **body**: the comment text (include fix direction for every `issue:`)
+- **label**: `issue:`, `suggestion:`, `question:`, `nitpick:`, or `praise` (no colon — praise has no prefix; see taxonomy)
+- **body**: the comment text (include fix direction for every `issue:`; for praise, no `praise:` prefix — write it directly)
 - **severity**: Low / Medium / High / Critical (your honest assessment)
 - **reasoning**: 1-2 sentences on why you're confident (or not) — the scorer reads this
 - **lens**: `general`

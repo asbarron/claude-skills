@@ -31,6 +31,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and 
 - `--review-only` and `--revise-only` flags
 - Revised plans written to `{original}-pro.md`
 
+## [pr-review 2.0.1] - 2026-05-27
+
+### Changed
+- Skip the "Follow-ups on existing feedback" section entirely when no prior review comments exist (no more "None" placeholders)
+- Praise comments no longer carry a `praise:` prefix — write the praise directly
+- Tightened conciseness rules across taxonomy and style: one-or-two-sentence cap, no preamble, no diff narration, no per-comment section headers
+
 ## [2.0.0] - 2026-04-02
 
 ### Added

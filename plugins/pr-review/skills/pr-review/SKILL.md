@@ -106,14 +106,15 @@ Load the reviewer persona:
 - `${CLAUDE_SKILL_DIR}/../../agents/reviewer.md`
 
 Using the persona and shared foundations, produce:
-- An overall verdict (1–3 sentences) for the review body
-- A short section: **"Follow-ups on existing feedback"**:
+- An overall verdict (1 short sentence for the review body — no preamble, no padding)
+- **Only if prior review comments exist on the PR**, a short **"Follow-ups on existing feedback"** section:
   - List the top prior feedback items (prefer the most recent review first).
   - Mark each as **resolved** / **still open** / **not applicable**.
   - For **still open** items, include a specific fix suggestion (what to change and where).
+  - If there are no prior comments, omit this section entirely — do not write "None" or "N/A".
 - Per-file inline comments with: file path, diff position (counted from the `@@` hunk header — NOT the actual line number), and comment body
 
-Calibrate depth to repo maturity (see calibration.md). Keep comments high-signal and concise.
+Calibrate depth to repo maturity (see calibration.md). Comments must be terse: one or two sentences max, no hedging, no restating obvious context. Cut every word that doesn't change the meaning.
 
 ### Deep mode (`--deep`)
 
@@ -161,12 +162,12 @@ Only Medium+ findings survive.
 #### 4d — Format the report
 
 Produce:
-- An overall verdict (1–3 sentences) with severity summary
-- A short section: **"Follow-ups on existing feedback"** (same format as normal mode)
+- An overall verdict (1 short sentence) with severity summary
+- **Only if prior review comments exist on the PR**, a short **"Follow-ups on existing feedback"** section (same format as normal mode). Otherwise omit the section entirely — do not write "None".
 - Findings ranked by tier (Critical → High → Medium), each with:
   - Tier badge and source lens(es)
   - File path and diff position
-  - Taxonomy label and comment body
+  - Taxonomy label and comment body (terse — see taxonomy.md and style.md)
 - Stats line: findings received → after dedup → after scoring
 
 ---

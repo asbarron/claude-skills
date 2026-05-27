@@ -1,6 +1,6 @@
 {
   "name": "pr-review",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Calibrated PR reviews via gh CLI. Use --deep for multi-lens review with confidence scoring.",
   "author": {
     "name": "Ava Barron"
