@@ -1,0 +1,9 @@
+# Google code-in-text: never pluralize or inflect code. "`INT64`s" -> "`INT64` values".
+extends: existence
+message: "Do not inflect code; add a noun after '%s' instead."
+level: warning
+nonword: true
+scope: raw
+tokens:
+  - '`[^`\s]+`s\b'
+  - "`[^`\\s]+`'s\\b"

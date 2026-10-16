@@ -48,6 +48,20 @@
       "license": "MIT",
       "keywords": ["harness-review", "claude-md", "hooks", "configuration", "audit"],
       "category": "development"
+    },
+    {
+      "name": "writing",
+      "source": "./plugins/writing",
+      "description": "Technical writing skills: Google-style docs with Diátaxis structure, lint hook, reviewer gate, and eval-backed rules that track upstream style guides.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Ava Barron"
+      },
+      "homepage": "https://github.com/asbarron/claude-skills",
+      "repository": "https://github.com/asbarron/claude-skills",
+      "license": "MIT",
+      "keywords": ["documentation", "technical-writing", "google-style", "diataxis", "vale"],
+      "category": "development"
     }
   ]
 }

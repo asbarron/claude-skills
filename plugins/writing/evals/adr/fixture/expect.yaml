@@ -1,0 +1,8 @@
+# Harness expectations for this fixture (phase 6). Not read by `claude plugin eval`.
+type: adr
+required_facts:
+  - 'sqlite3?'
+  - 'Postgres|PostgreSQL'
+  - 'Accepted|Proposed'
+run: []
+max_lines: 80

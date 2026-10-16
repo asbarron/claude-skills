@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geocalc"
+version = "0.3.1"
+description = "Great-circle distance, bearing, and midpoint between two coordinates"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = []
+
+[project.scripts]
+geocalc = "geocalc.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

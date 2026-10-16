@@ -1,0 +1,10 @@
+# Harness expectations for this fixture (phase 6). Not read by `claude plugin eval`.
+type: how-to
+required_facts:
+  - 'rotate_key\.py'
+  - 'API_KEY'
+  - '300'
+  - '--dry-run'
+run:
+  - 'python3 scripts/rotate_key.py --dry-run'
+max_lines: 120

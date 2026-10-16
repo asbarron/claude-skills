@@ -164,6 +164,44 @@ Claude Code harness audit. Run `/harness-review` in any project — Claude scans
 | `suggestion:` | Take it or leave it |
 | `strength:` | Something done well |
 
+### `writing`
+
+**TL;DR:** `/writing:docs` writes documentation in Google developer style, lints it, and gates it through a reviewer agent before it reaches you.
+
+| Command | Produces |
+|---|---|
+| `/writing:docs readme` | README from the repository's real entry points |
+| `/writing:docs docstrings src/geo.py` | Google-style docstrings with Args, Returns, and Raises |
+| `/writing:docs how-to "rotate the API key"` | One-quadrant how-to guide under `docs/how-to/` |
+| `/writing:docs adr "SQLite for local dev"` | Nygard ADR with negatives in Consequences |
+| `/writing:writing` | Commit messages, PR text, and release notes in the same voice |
+
+**Prerequisites:** none to write. For style feedback after every save, install `vale` and `markdownlint-cli2`, then run the sync once:
+
+```bash
+vale sync --config ~/.claude/plugins/cache/asbarron-skills/writing/1.0.0/.vale.ini
+```
+
+Rerun it after a plugin update; the hook falls back to the built-in `Writing` style until you do.
+
+#### How it works
+
+1. Classifies audience, task, and Diátaxis quadrant
+2. Gathers facts from entry points, tests, and `--help` before writing a word
+3. Plans a five-line outline, checks it, then writes section by section with examples first
+4. Runs `lint-docs.sh` (Vale, markdownlint, structure checks) and fixes errors, at most twice
+5. Launches `docs-reviewer`: correct > complete > current > readable; blocks on the first three
+
+#### Flags
+
+`--profile reader` adds a TL;DR-first layout with two-to-three-sentence paragraphs and "When to use" boundaries. `--no-gate` skips the reviewer. `--lang py|go|ts|rs` picks the docstring convention.
+
+#### Pausing the hook
+
+The plugin lints every Markdown file Claude writes. Set `WRITING_HOOK=off` or create a `.writing-hook-off` file in the project to turn that off without uninstalling.
+
+**When to use:** any doc a human or an agent will read to act. **When not to use:** marketing copy, blog posts, or anything without a code or product referent.
+
 ---
 
 ## Contributing

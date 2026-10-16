@@ -4,6 +4,17 @@ All notable changes to this project will be documented here.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [writing 1.0.0] - 2026-10-16
+
+### Added
+- `writing` plugin with `/writing:writing` (umbrella) and `/writing:docs` skills
+- Style canon in `references/` distilled from Google, Microsoft, Diátaxis, Write the Docs, plain-language guidelines, and per-language docstring conventions
+- Itemized `rules.md` as the single source of truth; Vale rules are generated from it
+- `docs-reviewer` gate agent with a binary rubric ordered correct > complete > current > readable
+- PostToolUse hook that lints Markdown with Vale and markdownlint and degrades silently when they are absent
+- Custom Vale style `Writing` for rules the Google and Microsoft packages miss
+- `claude plugin eval` suite (README, docstrings, how-to, ADR, no-trigger) and the `eval` workflow
+
 ## [harness-review 1.0.0] - 2026-04-23
 
 ### Added

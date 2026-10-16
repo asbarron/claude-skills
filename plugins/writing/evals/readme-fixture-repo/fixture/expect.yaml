@@ -1,0 +1,10 @@
+# Harness expectations for this fixture (phase 6). Not read by `claude plugin eval`.
+type: readme
+required_facts:
+  - 'geocalc distance'
+  - 'pip install'
+  - 'ValueError|exit (code )?2'
+  - '--json'
+run:
+  - 'python3 -m geocalc.cli --version'
+max_lines: 160

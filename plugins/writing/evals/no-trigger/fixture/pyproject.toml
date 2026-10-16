@@ -1,0 +1,10 @@
+[project]
+name = "geo"
+version = "0.1.0"
+description = "Great-circle helpers for latitude and longitude pairs"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

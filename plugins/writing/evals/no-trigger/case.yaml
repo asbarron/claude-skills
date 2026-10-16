@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: no-trigger
+description: Fix a failing test; the docs skill must stay silent and no docstrings may appear.
+tags: [negative, trigger, spike]
+context:
+  scaffold_script: scaffold.sh

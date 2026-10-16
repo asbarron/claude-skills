@@ -1,0 +1,12 @@
+{
+  "name": "writing",
+  "version": "1.0.0",
+  "description": "Technical writing skills: Google-style docs with Diátaxis structure, lint hook, reviewer gate, and eval-backed rules that track upstream style guides.",
+  "author": {
+    "name": "Ava Barron"
+  },
+  "homepage": "https://github.com/asbarron/claude-skills",
+  "repository": "https://github.com/asbarron/claude-skills",
+  "license": "MIT",
+  "keywords": ["documentation", "technical-writing", "google-style", "diataxis", "vale"]
+}

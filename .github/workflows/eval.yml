@@ -1,0 +1,181 @@
+name: eval
+# PR gate for the writing plugin. `validate` always runs and reports so it can
+# be a required check without deadlocking PRs that do not touch the plugin;
+# the expensive jobs gate on path filters and on the API key being present.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
+concurrency:
+  group: eval-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      plugin: ${{ steps.filter.outputs.plugin }}
+      workflows: ${{ steps.filter.outputs.workflows }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          filters: |
+            plugin:
+              - 'plugins/writing/**'
+            workflows:
+              - '.github/**'
+
+  validate:
+    needs: changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Nothing relevant changed
+        if: needs.changes.outputs.plugin != 'true' && needs.changes.outputs.workflows != 'true'
+        run: echo "no plugin or workflow changes; validate passes trivially"
+      - uses: ./.github/actions/setup-doc-tools
+        if: needs.changes.outputs.plugin == 'true' || needs.changes.outputs.workflows == 'true'
+        with:
+          sync-vale: "false"
+      - name: Validate plugin and marketplace manifests
+        if: needs.changes.outputs.plugin == 'true'
+        run: |
+          claude plugin validate plugins/writing --strict
+          claude plugin validate .claude-plugin/marketplace.json --strict
+      - name: Lint workflows and shell
+        if: needs.changes.outputs.workflows == 'true' || needs.changes.outputs.plugin == 'true'
+        run: |
+          actionlint -shellcheck="$(command -v shellcheck)"
+          shellcheck plugins/writing/hooks/*.sh plugins/writing/skills/docs/scripts/*.sh plugins/writing/evals/*/scaffold.sh
+      - name: Script tests and rules check
+        if: needs.changes.outputs.plugin == 'true'
+        run: |
+          python3 -I plugins/writing/skills/docs/scripts/build_rules.py --check
+          python3 -I plugins/writing/skills/docs/scripts/structure.py --self-test
+          python3 -m pytest plugins/writing/skills/docs/scripts/tests -q
+
+  lint:
+    needs: changes
+    if: needs.changes.outputs.plugin == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup-doc-tools
+      - name: Generate Vale rules from rules.md
+        run: python3 -I plugins/writing/skills/docs/scripts/build_rules.py
+      - name: Vale
+        uses: errata-ai/vale-action@v3
+        with:
+          version: 3.24.0
+          config: plugins/writing/.vale.ini
+          files: plugins/writing
+          reporter: github-pr-check
+          fail_on_error: true
+          filter_mode: nofilter
+          sync: false
+          vale_flags: "--glob=!**/{rules.md,evals/**,results/**,styles/**}"
+      - name: markdownlint
+        uses: DavidAnson/markdownlint-cli2-action@v24
+        with:
+          config: plugins/writing/.markdownlint-cli2.yaml
+          globs: |
+            plugins/writing/**/*.md
+            !plugins/writing/evals/**/fixture/**
+            !plugins/writing/styles/**
+      - name: Structure checks on the plugin's own docs
+        run: |
+          set -euo pipefail
+          files=$(find plugins/writing/shared plugins/writing/skills -name '*.md' -not -name rules.md)
+          # shellcheck disable=SC2086
+          python3 -I plugins/writing/skills/docs/scripts/structure.py $files > structure.json || true
+          python3 -c "import json; d=json.load(open('structure.json')); bad=[(f['path'],v) for f in d['files'] for v in f['violations'] if v['level']=='error']; print(json.dumps(bad, indent=1)); raise SystemExit(1 if bad else 0)"
+      - name: Links
+        uses: lycheeverse/lychee-action@v2
+        continue-on-error: true
+        with:
+          args: --no-progress --exclude-mail --max-retries 2 --accept 200,204,206,429 'plugins/writing/**/*.md' 'README.md'
+          fail: true
+
+  plugin-eval:
+    needs: [changes, validate]
+    if: needs.changes.outputs.plugin == 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false)
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Skip without an API key
+        if: env.ANTHROPIC_API_KEY == ''
+        run: echo "ANTHROPIC_API_KEY secret not set; plugin-eval skipped (reports success)"
+      - uses: ./.github/actions/setup-doc-tools
+        if: env.ANTHROPIC_API_KEY != ''
+        with:
+          sync-vale: "false"
+      - name: Run the eval suite
+        id: run
+        if: env.ANTHROPIC_API_KEY != ''
+        run: |
+          set +e
+          claude plugin eval plugins/writing --trust-plugin --scaffold \
+            --allow-tools Write Edit "Bash(python3 *)" "Bash(ls *)" "Bash(cat *)" \
+            --runs 3 --threshold 0.8 --ablation none \
+            --model claude-sonnet-5-5 --judge-model claude-haiku-5-5 \
+            --max-cost-usd 20 --json results.json --no-publish
+          code=$?
+          echo "exit=$code" >> "$GITHUB_OUTPUT"
+          if [ "$code" = "2" ]; then echo "::error::plugin eval hit the cost ceiling (exit 2); re-run with workflow_dispatch after raising --max-cost-usd"; fi
+          exit 0
+      - name: Re-run failed cases once
+        id: rerun
+        if: env.ANTHROPIC_API_KEY != '' && steps.run.outputs.exit == '1'
+        run: |
+          set +e
+          failed=$(python3 -c "import json; d=json.load(open('results.json')); print(' '.join(c['name'] for c in d['cases'] if c['aggregates']['score'] < 0.8))")
+          echo "failed cases: $failed"
+          [ -n "$failed" ] || { echo "exit=1" >> "$GITHUB_OUTPUT"; exit 0; }
+          args=(); for c in $failed; do args+=(--case "$c"); done
+          claude plugin eval plugins/writing --trust-plugin --scaffold \
+            --allow-tools Write Edit "Bash(python3 *)" "Bash(ls *)" "Bash(cat *)" \
+            --runs 3 --threshold 0.8 --ablation none \
+            --model claude-sonnet-5-5 --judge-model claude-haiku-5-5 \
+            --max-cost-usd 10 --json results-rerun.json --no-publish "${args[@]}"
+          echo "exit=$?" >> "$GITHUB_OUTPUT"
+      - name: Summarize
+        if: env.ANTHROPIC_API_KEY != ''
+        run: |
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, pathlib
+          for name in ("results.json", "results-rerun.json"):
+              p = pathlib.Path(name)
+              if not p.exists():
+                  continue
+              d = json.loads(p.read_text())
+              print(f"### {name}: overall {d['aggregates']['overallScore']:.2f}, passed {d['aggregates']['casesPassed']}/{d['aggregates']['casesTotal']}, cost ${d.get('costUsd', 0):.2f}")
+              print("| case | score | delta |"); print("|---|---|---|")
+              for c in d["cases"]:
+                  a = c["aggregates"]; print(f"| {c['name']} | {a['score']:.2f} | {a.get('delta', '')} |")
+          PY
+      - uses: actions/upload-artifact@v7
+        if: env.ANTHROPIC_API_KEY != ''
+        with:
+          name: plugin-eval-results
+          path: |
+            results.json
+            results-rerun.json
+            plugins/writing/evals/results/**/report.html
+          if-no-files-found: ignore
+      - name: Gate
+        if: env.ANTHROPIC_API_KEY != ''
+        run: |
+          first="${{ steps.run.outputs.exit }}"; second="${{ steps.rerun.outputs.exit }}"
+          if [ "$first" = "0" ] || [ "$second" = "0" ]; then echo "eval passed"; exit 0; fi
+          echo "::error::plugin eval below threshold (first run exit $first, re-run exit ${second:-n/a})"; exit 1

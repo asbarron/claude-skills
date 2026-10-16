@@ -1,0 +1,180 @@
+{
+  "schema": 1,
+  "types": {
+    "readme": {
+      "quadrant": "mixed-allowed",
+      "detect": {
+        "filename": "(?i)^readme\\.md$"
+      },
+      "required": [
+        {
+          "name": "install",
+          "heading": "(?i)^(install|installation|getting started|setup)\\b"
+        },
+        {
+          "name": "usage",
+          "heading": "(?i)^(usage|use|quick ?start|example)"
+        },
+        {
+          "name": "license",
+          "heading": "(?i)^licen[sc]e"
+        }
+      ],
+      "order": [
+        "install",
+        "usage",
+        "license"
+      ],
+      "usage_before": [
+        "(?i)^(api|reference)"
+      ]
+    },
+    "how-to": {
+      "quadrant": "how-to",
+      "detect": {
+        "path": "(?i)(^|/)how-?to/",
+        "frontmatter_type": "how-to"
+      },
+      "h1": "(?i)^(how to |[a-z]+(e|t|d|p|k|n|g|y|w|l|r)\\b)",
+      "forbid": [
+        {
+          "pattern": "(?i)\\bin this tutorial\\b",
+          "msg": "How-to guides do not teach; move this to a tutorial."
+        },
+        {
+          "pattern": "(?i)\\blet's\\b",
+          "msg": "No \"let\\x27s\" in how-to guides."
+        }
+      ],
+      "needs_ordered_list": true
+    },
+    "tutorial": {
+      "quadrant": "tutorial",
+      "detect": {
+        "path": "(?i)(^|/)tutorials?/",
+        "frontmatter_type": "tutorial"
+      },
+      "needs_ordered_list": true,
+      "min_ordered_items": 3,
+      "forbid": [
+        {
+          "pattern": "(?i)\\byou can also\\b|\\balternatively\\b",
+          "msg": "Tutorials do not offer alternatives."
+        }
+      ]
+    },
+    "reference": {
+      "quadrant": "reference",
+      "detect": {
+        "path": "(?i)(^|/)reference/",
+        "frontmatter_type": "reference"
+      },
+      "needs_table_or_code": true,
+      "forbid": [
+        {
+          "pattern": "^\\s*1\\. ",
+          "msg": "Reference pages describe; they do not give numbered steps.",
+          "multiline": true
+        }
+      ]
+    },
+    "explanation": {
+      "quadrant": "explanation",
+      "detect": {
+        "path": "(?i)(^|/)(explanation|concepts|discussion|background)/",
+        "frontmatter_type": "explanation"
+      },
+      "forbid": [
+        {
+          "pattern": "^\\s*1\\. ",
+          "msg": "Explanation pages have no procedures.",
+          "multiline": true
+        }
+      ]
+    },
+    "adr": {
+      "quadrant": "explanation",
+      "detect": {
+        "filename": "(?i)^(adr-?\\d+|\\d{3,4}-[a-z0-9-]+)\\.md$"
+      },
+      "required": [
+        {
+          "name": "context",
+          "heading": "(?i)^context"
+        },
+        {
+          "name": "decision",
+          "heading": "(?i)^decision"
+        },
+        {
+          "name": "status",
+          "heading": "(?i)^status"
+        },
+        {
+          "name": "consequences",
+          "heading": "(?i)^consequences"
+        }
+      ],
+      "order": [
+        "context",
+        "decision",
+        "status",
+        "consequences"
+      ],
+      "status_values": [
+        "Proposed",
+        "Accepted",
+        "Deprecated",
+        "Superseded"
+      ]
+    },
+    "changelog": {
+      "quadrant": "reference",
+      "detect": {
+        "filename": "(?i)^changelog\\.md$"
+      },
+      "required": [
+        {
+          "name": "unreleased",
+          "heading": "^\\[Unreleased\\]"
+        }
+      ],
+      "version_heading": "^\\[\\d+\\.\\d+\\.\\d+[^\\]]*\\] - \\d{4}-\\d{2}-\\d{2}( \\[YANKED\\])?$|^\\[[a-z0-9-]+ \\d+\\.\\d+\\.\\d+\\] - \\d{4}-\\d{2}-\\d{2}$",
+      "allowed_sections": [
+        "Added",
+        "Changed",
+        "Deprecated",
+        "Removed",
+        "Fixed",
+        "Security"
+      ]
+    },
+    "runbook": {
+      "quadrant": "how-to",
+      "detect": {
+        "path": "(?i)(^|/)runbooks?/",
+        "frontmatter_type": "runbook"
+      },
+      "required": [
+        {
+          "name": "trigger",
+          "heading": "(?i)^(when to use|trigger|symptoms)"
+        },
+        {
+          "name": "steps",
+          "heading": "(?i)^(steps|procedure|resolution)"
+        },
+        {
+          "name": "verify",
+          "heading": "(?i)^(verify|verification|check)"
+        }
+      ],
+      "needs_ordered_list": true
+    },
+    "commits": {
+      "quadrant": "reference",
+      "pattern": "^(feat|fix|build|chore|ci|docs|style|refactor|perf|test|revert)(\\([a-z0-9-]+\\))?!?: .+"
+    }
+  },
+  "_comment": "Machine-readable section requirements per doc type. Single source of truth: structure.py loads it, the docs skill reads it when planning, and the reviewer's Complete group means 'the structure check for this type passes'. Keys per type: quadrant, detect (filename/path/frontmatter_type regexes), required (ordered heading regexes), order, forbid (body regexes), h1, needs_ordered_list, min_ordered_items, needs_table_or_code, status_values, version_heading, allowed_sections."
+}

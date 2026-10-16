@@ -1,0 +1,7 @@
+# Google tone and accessibility: avoid exclamation marks in docs.
+extends: existence
+message: "Avoid exclamation marks."
+level: warning
+nonword: true
+tokens:
+  - '\w!(?:\s|$)'

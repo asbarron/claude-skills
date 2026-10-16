@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: readme-fixture-repo
+description: Write a README for a small Python CLI from its real entry points.
+tags: [readme, docs, spike]
+context:
+  scaffold_script: scaffold.sh

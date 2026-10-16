@@ -1,0 +1,5 @@
+# Terms that are always errors (Vale.Avoid). One regex per line.
+foo
+bar
+baz
+John Doe
