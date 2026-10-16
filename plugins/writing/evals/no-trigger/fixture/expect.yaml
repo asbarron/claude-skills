@@ -1,0 +1,6 @@
+# Harness expectations for this fixture (phase 6). Not read by `claude plugin eval`.
+type: none
+required_facts: []
+run:
+  - 'python3 -m pytest -q'
+max_lines: 0

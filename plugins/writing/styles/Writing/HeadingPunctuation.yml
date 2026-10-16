@@ -1,0 +1,8 @@
+# Manual rule (rules.md R-014): no end punctuation in headings.
+extends: existence
+message: "Remove the end punctuation from the heading."
+level: error
+nonword: true
+scope: heading
+tokens:
+  - '[.:;!?]$'

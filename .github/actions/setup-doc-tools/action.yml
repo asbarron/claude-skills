@@ -1,0 +1,53 @@
+name: Set up doc tools
+description: Installs the pinned Claude Code CLI, Vale, markdownlint-cli2, and actionlint used by the writing plugin's CI. Versions live here once so Renovate can bump them.
+inputs:
+  claude-code-version:
+    description: "@anthropic-ai/claude-code npm version"
+    # renovate: datasource=npm depName=@anthropic-ai/claude-code
+    default: "2.1.301"
+  vale-version:
+    description: Vale release (no leading v)
+    # renovate: datasource=github-releases depName=vale-cli/vale
+    default: "3.24.0"
+  markdownlint-version:
+    description: markdownlint-cli2 npm version
+    # renovate: datasource=npm depName=markdownlint-cli2
+    default: "0.23.3"
+  actionlint-version:
+    description: actionlint release (no leading v)
+    # renovate: datasource=github-releases depName=rhysd/actionlint
+    default: "1.7.12"
+  sync-vale:
+    description: Run vale sync for the plugin config (needs network)
+    default: "true"
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v7
+      with:
+        node-version: "22"
+    - uses: actions/setup-python@v7
+      with:
+        python-version: "3.12"
+    - name: Install CLI tools
+      shell: bash
+      run: |
+        set -euo pipefail
+        npm install -g "@anthropic-ai/claude-code@${{ inputs.claude-code-version }}" "markdownlint-cli2@${{ inputs.markdownlint-version }}"
+        curl -fsSL "https://github.com/errata-ai/vale/releases/download/v${{ inputs.vale-version }}/vale_${{ inputs.vale-version }}_Linux_64-bit.tar.gz" | sudo tar -xz -C /usr/local/bin vale
+        curl -fsSL "https://github.com/rhysd/actionlint/releases/download/v${{ inputs.actionlint-version }}/actionlint_${{ inputs.actionlint-version }}_linux_amd64.tar.gz" | sudo tar -xz -C /usr/local/bin actionlint
+        sudo apt-get install -y -q shellcheck >/dev/null
+        python3 -m pip install --quiet pytest
+        claude --version; vale --version; markdownlint-cli2 --version; actionlint -version
+    - name: Cache Vale packages
+      if: inputs.sync-vale == 'true'
+      uses: actions/cache@v6
+      with:
+        path: plugins/writing/styles/Google
+        key: vale-styles-${{ hashFiles('plugins/writing/.vale.ini') }}
+    - name: Sync Vale packages
+      if: inputs.sync-vale == 'true'
+      shell: bash
+      run: |
+        set -euo pipefail
+        [ -d plugins/writing/styles/Google ] || vale sync --config plugins/writing/.vale.ini

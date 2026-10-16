@@ -1,0 +1,40 @@
+# Manual rule (rules.md R-013): headings use sentence case.
+extends: capitalization
+message: "Use sentence case for '%s'."
+level: error
+scope: heading
+match: $sentence
+indicators:
+  - ':'
+exceptions:
+  - PR
+  - PRs
+  - TL;DR
+  - ADRs
+  - UI
+  - HTTP
+  - ID
+  - SDK
+  - MCP
+  - CI
+  - SQL
+  - API
+  - CLI
+  - README
+  - ADR
+  - JSON
+  - YAML
+  - HTTP
+  - URL
+  - Diátaxis
+  - Google
+  - Microsoft
+  - Python
+  - Go
+  - Rust
+  - TypeScript
+  - Markdown
+  - Vale
+  - Docker
+  - GitHub
+  - Claude

@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: python-docstrings
+description: Add Google-style docstrings to a small Python module with raising, tuple-returning, and generator functions.
+tags: [docstrings, docs, spike]
+context:
+  scaffold_script: scaffold.sh

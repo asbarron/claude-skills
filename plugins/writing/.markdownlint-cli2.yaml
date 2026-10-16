@@ -1,0 +1,9 @@
+config:
+  default: true
+  MD013: false   # line length: prose is not hard-wrapped
+  MD060: false   # table column style: compact pipes are fine
+  MD033: { allowed_elements: [details, summary, br, img, kbd, var, code] }
+  MD041: false   # first line need not be an H1 (frontmatter, skill files)
+  MD024: { siblings_only: true }
+  MD026: { punctuation: ".,;:!" }
+ignores: ["**/node_modules/**", "**/styles/**", "**/evals/**", "**/results/**", "**/references/rules.md"]

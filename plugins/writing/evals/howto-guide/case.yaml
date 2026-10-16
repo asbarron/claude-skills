@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: howto-guide
+description: Write a how-to guide for rotating a service's API key from the real rotation script and config.
+tags: [how-to, docs, spike]
+context:
+  scaffold_script: scaffold.sh

@@ -1,0 +1,10 @@
+# Manual rule (rules.md R-034): angle-bracket or MY_/YOUR_ placeholders in prose. Code blocks are covered by structure.py (R-018).
+extends: existence
+message: "Use an UPPER_SNAKE_CASE placeholder instead of '%s'."
+level: error
+nonword: true
+tokens:
+  - '<[a-z][a-z0-9_-]{2,}>'
+  - '\bmy_[a-z_]+\b'
+  - '\bMY_[A-Z_]+\b'
+  - '\bYOUR_[A-Z_]+\b'

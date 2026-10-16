@@ -1,0 +1,5 @@
+# synced packages (vale sync) and generated rules
+Google/
+Microsoft/
+.vale-config/
+Writing/Gen*.yml
