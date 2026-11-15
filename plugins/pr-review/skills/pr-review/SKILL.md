@@ -3,7 +3,7 @@ name: pr-review
 description: "Review a GitHub PR: calibrated inline comments via gh CLI. Use --deep for multi-lens review with confidence scoring."
 disable-model-invocation: true
 user-invocable: true
-allowed-tools: Bash, Read, Grep, Glob, Agent
+allowed-tools: Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh repo view:*), Bash(gh api:*), Bash(git log:*), Bash(git rev-list:*), Bash(ls:*), Read, Grep, Glob, Agent
 argument-hint: "[PR number, #123, or URL] [--deep] [--dry-run] [--approve]"
 ---
 
