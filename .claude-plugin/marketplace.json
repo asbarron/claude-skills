@@ -11,7 +11,7 @@
       "name": "pr-review",
       "source": "./plugins/pr-review",
       "description": "Calibrated PR reviews via gh CLI. Use --deep for multi-lens review with confidence scoring.",
-      "version": "2.0.1",
+      "version": "2.0.2",
       "author": {
         "name": "Ava Barron"
       },
@@ -25,7 +25,7 @@
       "name": "pro-plan",
       "source": "./plugins/pro-plan",
       "description": "Review and revise implementation plans: tech-stack-aware best practices, DRY checks, structure analysis, and completeness review.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "Ava Barron"
       },
@@ -39,7 +39,7 @@
       "name": "harness-review",
       "source": "./plugins/harness-review",
       "description": "Audit your Claude Code harness: research-backed enforcement mapping, bloat detection, completeness checks, and best-practices review.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "Ava Barron"
       },

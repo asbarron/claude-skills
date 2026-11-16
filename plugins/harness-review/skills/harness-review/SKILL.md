@@ -3,7 +3,7 @@ name: harness-review
 description: "Audit your Claude Code harness: research-backed enforcement mapping, bloat detection, completeness checks, and best-practices review."
 disable-model-invocation: true
 user-invocable: true
-allowed-tools: Bash, Read, Grep, Glob, Agent
+allowed-tools: Bash(ls:*), Read, Grep, Glob, Agent
 argument-hint: "[--dry-run]"
 ---
 

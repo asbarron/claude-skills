@@ -3,7 +3,7 @@ name: pro-plan
 description: "Review and revise implementation plans: tech-stack-aware best practices, DRY checks, structure analysis, and completeness review."
 disable-model-invocation: true
 user-invocable: true
-allowed-tools: Bash, Read, Grep, Glob, Agent, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Bash(ls:*), Bash(head:*), Read, Grep, Glob, Agent, WebSearch, WebFetch, AskUserQuestion
 argument-hint: "[path/to/plan.md] [--review-only] [--revise-only]"
 ---
 

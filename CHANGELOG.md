@@ -4,6 +4,14 @@ All notable changes to this project will be documented here.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [harness-review 1.0.1, pr-review 2.0.2, pro-plan 1.0.1] - 2026-11-15
+
+### Changed
+- Narrowed `allowed-tools` in each skill from blanket `Bash` to the exact commands it runs
+
+### Added
+- Square listing icon for each plugin at `assets/icon.png`, set as `icon` in `plugin.json`
+
 ## [harness-review 1.0.0] - 2026-04-23
 
 ### Added
